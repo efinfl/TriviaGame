@@ -1,6 +1,12 @@
 $(document).ready(function() {
 
 // Global Variable
+    // Questions and Answeres objects
+    // Selected answere
+    // Correct Total
+    // Incorrect Total
+    // Total number of quetions
+
 
 // Start Game with a startGame function that's triggered when when Start Game button is clicked.
     // First set of questions is displayed.
@@ -17,8 +23,8 @@ $(document).ready(function() {
 
 // User is alerted that time's up.
 
-//  Answers and how many are correct is displayed
-    // Numvber of correct answeres added to **points**
+// Answers and how many are correct is displayed
+    // Number of correct answeres added to points
 
 // User has option to tray another set of questions by pressing a button.
 
