@@ -37,10 +37,9 @@ $(document).ready(function () {
     // Index variable
     var i = 0;
 
-    // Start Game with a startGame function that's triggered when when Start Game button is clicked.
-    function startGame() {
-        $("#dislplayQuestion").text(game[0].question);
-    }
+    // Game sarts when start button is pressed.
+   
+    // Displays questions from object array
     function nextQuestion() {
         $("#dislplayQuestion").text(game[i].question);
         $("#answer_1").text(game[i].answerChoices[0]);
@@ -49,54 +48,52 @@ $(document).ready(function () {
         $("#answer_4").text(game[i].answerChoices[3]);
         console.log(game[i].answerChoices);
     }
-    
+
+    // Checks to see if chosen answer is correct.
     function checkAnswer(answer, currentQuestion) {
         if (answer === currentQuestion.correct) {
+            // if true, alert saying you're correct.
             alert("You Got it?");
+            // Total correct counter ticks up one.
             totalCorrect++
+            // sets to the next question
             i++
+            // Displays next question
             nextQuestion()
         }
         else {
+            // Otherwise total incorrect ticks up one
             totalIncorrect++
+            // Alerts your choice was incorrect
             alert("This is the corrct answer" + currentQuestion.correct);
+            
+            // Sets to next question
             i++
+            // Displays next question
             nextQuestion()
         }
     }
-
+    // When click displays next question is anweres
     $("#startGame").on("click", function () {
         nextQuestion();
     });
 
+    // Recieves answer chosen
     $(".answer").on("click", function () {
         var chosenAnswer = $(this).text();
-
         checkAnswer(chosenAnswer, game[i])
-        
+
     });
 
+    // Checks to see if you've run out of questions
+    if (game[i] >= 3) {
+        alert("That's it. Thanks for playing");
+    }
 
-
-
-    // First set of questions is displayed.
-    // Timer Starts
-    // Displays a set of Questions each with a set of Answers.
-    // Each Answer has an input type of chackbox prepended to it
-
-    // Selection is stored in a variable
-
-    // If user completes all selections before time is up, a button is pressed to display answers and how many are correct.
-    // Number of correct Answers is added to **points**
-
-    // Else game is stopped if timer reaches zero.
-
-    // User is alerted that time's up.
-
-    // Answers and how many are correct is displayed
-    // Number of correct Answers added to points
-
-    // User has option to tray another set of questions by pressing a button.
+    // Creat a count down function with setInterval
+    // If timer reaches 0, display correct answer and tick up total incorrect.
+    // Reset time
+    // Display next question.
 
 
 
