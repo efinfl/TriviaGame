@@ -22,9 +22,6 @@ $(document).ready(function () {
         }
 
     ]
-    // Selected Answer
-    var userPick;
-
     // Correctly Answered Total
     var totalCorrect = 0
 
@@ -37,16 +34,21 @@ $(document).ready(function () {
     // Index variable
     var i = 0;
 
-    // Game sarts when start button is pressed.
-   
+    // Amount of seconds to answere each question
+    var allottedTime = 10;
+
+    //  Variable that will hold our interval ID when we execute
+    //  the "run" function
+    var intervalId;
+
     // Displays questions from object array
-    function nextQuestion() {
+    function showAQuestion() {
         $("#dislplayQuestion").text(game[i].question);
         $("#answer_1").text(game[i].answerChoices[0]);
         $("#answer_2").text(game[i].answerChoices[1]);
         $("#answer_3").text(game[i].answerChoices[2]);
         $("#answer_4").text(game[i].answerChoices[3]);
-        console.log(game[i].answerChoices);
+        // console.log(game[i].answerChoices);
     }
 
     // Checks to see if chosen answer is correct.
@@ -59,38 +61,73 @@ $(document).ready(function () {
             // sets to the next question
             i++
             // Displays next question
-            nextQuestion()
+            showAQuestion();
+            countDown();
         }
         else {
             // Otherwise total incorrect ticks up one
             totalIncorrect++
             // Alerts your choice was incorrect
-            alert("This is the corrct answer" + currentQuestion.correct);
-            
+            alert("Wrong. Here's the answer: " + currentQuestion.correct);
+
             // Sets to next question
             i++
             // Displays next question
-            nextQuestion()
+            showAQuestion();
+            countDown();
         }
     }
-    // When click displays next question is anweres
+    // Starts game when clicked by displaying a question
     $("#startGame").on("click", function () {
-        nextQuestion();
+        showAQuestion();
+        countDown();
+        $("#startGame").hide(800);
     });
 
     // Recieves answer chosen
     $(".answer").on("click", function () {
         var chosenAnswer = $(this).text();
-        checkAnswer(chosenAnswer, game[i])
+        checkAnswer(chosenAnswer, game[i]);
+        stopCountDown();
 
     });
 
     // Checks to see if you've run out of questions
-    if (game[i] >= 3) {
-        alert("That's it. Thanks for playing");
+    // function checkIfQuestionsRanOut() {
+    //     if (totalCorrect + totalIncorrect >= game.lenght) {
+    //         alert("That's it. Thanks for playing");
+    //     }
+    //     console.log()
+    // }
+    /* Function takes decrement function and
+    sets pace at countdown to one number per second */
+    function countDown() {
+        clearInterval(intervalId);
+        intervalId = setInterval(decrement, 1000);
+    }
+    /* Function that decreses allottedTime variable by one
+    and displays it in the countDonw div
+    this function is then passed into the contDown function
+    to tell the decrement to go at a pace of 1 sec per decrement.*/
+    function decrement() {
+        allottedTime--;
+        $("#countDown").html("<h2>" + allottedTime + "</h2>");
+
+        if (allottedTime === 0) {
+            alert("Time Up!");
+            totalIncorrect++;
+            showAQuestion();
+            stopCountDown();
+            countDown()
+            
+        }
+    }
+    /* function clears(resets) the allottedTime variable */
+    function stopCountDown() {
+        clearInterval(allottedTime);
+        alottedTime = 10;
     }
 
-    // Creat a count down function with setInterval
     // If timer reaches 0, display correct answer and tick up total incorrect.
     // Reset time
     // Display next question.
