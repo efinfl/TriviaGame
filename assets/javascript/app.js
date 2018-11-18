@@ -41,46 +41,78 @@ $(document).ready(function () {
     //  the "run" function
     var intervalId;
 
-    // Displays questions from object array
+    // Timer reset, question display
     function showAQuestion() {
+        // Empties timer display to reset timer display
+        $("#countDown").empty();
+        // starts timer
+        intervalId = setInterval(decrement, 1000);
+        /* calls questions and answers from object array and displays
+        to corresponding ids in html*/
         $("#dislplayQuestion").text(game[i].question);
         $("#answer_1").text(game[i].answerChoices[0]);
         $("#answer_2").text(game[i].answerChoices[1]);
         $("#answer_3").text(game[i].answerChoices[2]);
         $("#answer_4").text(game[i].answerChoices[3]);
-        // console.log(game[i].answerChoices);
+
     }
 
     // Checks to see if chosen answer is correct.
     function checkAnswer(answer, currentQuestion) {
+        stopCountDown();
         if (answer === currentQuestion.correct) {
             // if true, alert saying you're correct.
             alert("You Got it?");
             // Total correct counter ticks up one.
-            totalCorrect++
+            totalCorrect++;
             // sets to the next question
-            i++
+            i++;
             // Displays next question
             showAQuestion();
-            countDown();
+            
         }
         else {
             // Otherwise total incorrect ticks up one
             totalIncorrect++
-            // Alerts your choice was incorrect
+            // Alerts your choice was incorrect and shows the correct answere
             alert("Wrong. Here's the answer: " + currentQuestion.correct);
-
             // Sets to next question
-            i++
+            i++;
             // Displays next question
             showAQuestion();
-            countDown();
+            
         }
+        
+    }
+    /* Function that decreses allottedTime variable by one
+    and displays it in the countDown div*/
+    function decrement() {
+        //allotedTime is set as a global var 
+        allottedTime--;
+        // dynamically displays countdown
+        $("#countDown").html("<h2>" + allottedTime + "</h2>");
+        // checks to see if time has run out to answere question
+        if (allottedTime === 0) {
+            // if true, then alerts...
+            alert("Time Up!");
+            // ticks up one for incorrect answere
+            totalIncorrect++;
+            // moves to next question in array
+            i++;
+            // stops timer
+            stopCountDown();
+            // moves onto next question
+            showAQuestion();
+        }
+    }
+    /* function clears(resets) the allottedTime variable */
+    function stopCountDown() {
+        clearInterval(intervalId);
+        allottedTime = 10;  
     }
     // Starts game when clicked by displaying a question
     $("#startGame").on("click", function () {
         showAQuestion();
-        countDown();
         $("#startGame").hide(800);
     });
 
@@ -88,8 +120,7 @@ $(document).ready(function () {
     $(".answer").on("click", function () {
         var chosenAnswer = $(this).text();
         checkAnswer(chosenAnswer, game[i]);
-        stopCountDown();
-
+        // stopCountDown();
     });
 
     // Checks to see if you've run out of questions
@@ -99,34 +130,7 @@ $(document).ready(function () {
     //     }
     //     console.log()
     // }
-    /* Function takes decrement function and
-    sets pace at countdown to one number per second */
-    function countDown() {
-        clearInterval(intervalId);
-        intervalId = setInterval(decrement, 1000);
-    }
-    /* Function that decreses allottedTime variable by one
-    and displays it in the countDonw div
-    this function is then passed into the contDown function
-    to tell the decrement to go at a pace of 1 sec per decrement.*/
-    function decrement() {
-        allottedTime--;
-        $("#countDown").html("<h2>" + allottedTime + "</h2>");
-
-        if (allottedTime === 0) {
-            alert("Time Up!");
-            totalIncorrect++;
-            showAQuestion();
-            stopCountDown();
-            countDown()
-            
-        }
-    }
-    /* function clears(resets) the allottedTime variable */
-    function stopCountDown() {
-        clearInterval(allottedTime);
-        alottedTime = 10;
-    }
+    
 
     // If timer reaches 0, display correct answer and tick up total incorrect.
     // Reset time
