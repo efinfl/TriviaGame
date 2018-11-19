@@ -1,2 +1,71 @@
 /*  font-family: 'Oswald', sans-serif;
 font-family: 'Slabo 27px', serif;*/
+
+/* Dark Blue: 48, 55, 151 */
+/* Pink: 232, 39, 110 */
+/* Yellow: 253, 212, 63 */
+/* Light Blue: 112, 215, 214 */
+
+p,
+h1,
+h2,
+h3,
+{
+    line-height: 116%;
+}
+
+/* FPO div reference */
+/* div {
+    border: .5px magenta solid;
+} */
+
+.jumbotron {
+    padding-top: 2rem;
+    background-image: url("../images/backGround3.png");
+    background-color: rgb(45, 99, 172);
+    background-repeat: repeat;
+    
+}
+
+p,
+.answer {
+    /* display: inline-block; */
+    font-family: "Roboto Slab", serif;
+    font-size: 1em;
+    font-weight: 500;
+    color: rgb(48, 55, 151);
+    padding: .25em .5em;
+    background-color: rgb(112, 215, 214);
+    margin-top: .5em;
+}
+.answer:hover {
+    opacity: .75;
+    pointer-events: auto;
+    
+}
+#countdown {
+    background-color: none;
+}
+
+
+#dislplayQuestion{
+    font-family: "Oswald", sans-serif;
+    font-size: 1.5em;
+    color: rgb(253, 212, 63);
+    padding: .25em .5em;
+    background-color: rgb(48, 55, 151);
+}
+
+.questions {
+    padding: 1em;
+    background-color: white;
+    border: .5px lightgray solid;
+    border-radius: .25em;
+
+
+}
+
+#logo {
+    max-width: 100%;
+    height: auto;
+}

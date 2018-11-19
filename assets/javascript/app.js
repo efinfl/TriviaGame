@@ -7,12 +7,12 @@ $(document).ready(function () {
     var game = [
         {
             question: "How many lives does a cat have?",
-            answerChoices: ["9", "As many as it wants", "1", "10"],
+            answerChoices: ["Nine", "As many as it wants", "One", "Ten"],
             correct: "1"
         },
         {
             question: "How many planets are in the solar system?",
-            answerChoices: ["9", "10", "8", "7"],
+            answerChoices: ["Nine", "Ten", "Eight", "Seven"],
             correct: "8"
         },
         {
