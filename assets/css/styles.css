@@ -58,7 +58,7 @@ p,
 
 .questions {
     padding: 1em;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     border: .5px lightgray solid;
     border-radius: .25em;
 
