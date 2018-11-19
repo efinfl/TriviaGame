@@ -8,12 +8,12 @@ $(document).ready(function () {
         {
             question: "How many lives does a cat have?",
             answerChoices: ["Nine", "As many as it wants", "One", "Ten"],
-            correct: "1"
+            correct: "One"
         },
         {
             question: "How many planets are in the solar system?",
             answerChoices: ["Nine", "Ten", "Eight", "Seven"],
-            correct: "8"
+            correct: "Eight"
         },
         {
             question: "Who invented the olie skateboard maneuver?",

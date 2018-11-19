@@ -17,9 +17,14 @@
 <body>
     <div class="container">
         <div class="jumbotron">
-            <div><img id="logo" src="assets/images/Logo.png"></div>
-            <button type="button" class="btn btn-light" id="startGame">Click to Start</button>
-            <div id=countDown></div>
+            <div class=row>
+                <div class="col-9"><img id="logo" src="assets/images/Logo.png"></div>
+                <div class="col-3" id=countDownContainer><img src="assets/images/stopWatch.png">
+                    <button type="button" class="btn btn-primary" id="startGame">Click to Start</button>
+                    <div id=countDown></div>
+                    <div class=totals></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -32,18 +37,6 @@
             <div id="answer_4" class="answer"></div>
         </div>
     </div>
-    <!-- <div class="container">
-        <div class="card col-12">
-        <div class="card-header"id="dislplayQuesßtion"></div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" id="answer_1" class="answer"></li>
-          <li class="list-group-item" id="answer_2" class="answer"></li>
-          <li class="list-group-item" id="answer_3" class="answer"></li>
-          <li class="list-group-item" id="answer_4" class="answer"></li>
-        </ul>
-      </div>
-
-    </div> -->
 
 
     <script src="assets/javascript/app.js"></script>
