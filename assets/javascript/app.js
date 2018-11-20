@@ -19,7 +19,13 @@ $(document).ready(function () {
             question: "Who invented the olie skateboard maneuver?",
             answerChoices: ["Oliver North", "Oliver Kahn", "Alan 'Ollie' Gelfand", "Olivier Messiaen"],
             correct: "Alan 'Ollie' Gelfand"
-        }
+        },
+        {
+            question: "Who was the first man on the moon",
+            answerChoices: ["Buzz Aldrin", "John Glenn", "Neil Armstrong", "Olivier Messiaen"],
+            correct: "Neil Armstrong"
+        },
+
 
     ]
     // Correctly Answered Total
@@ -42,7 +48,14 @@ $(document).ready(function () {
     var intervalId;
 
     // Timer reset, question display
+    $(".totals").hide();
+
     function showAQuestion() {
+        // Checks to see if you've run out of questions
+        if (totalCorrect + totalIncorrect >= 4) {
+            alert("That's it. Thanks for playing");
+            location.reload();
+        }
         // Empties timer display to reset timer display
         $("#countDown").empty();
         // starts timer
@@ -54,8 +67,9 @@ $(document).ready(function () {
         $("#answer_2").text(game[i].answerChoices[1]);
         $("#answer_3").text(game[i].answerChoices[2]);
         $("#answer_4").text(game[i].answerChoices[3]);
-
     }
+
+
 
     // Checks to see if chosen answer is correct.
     function checkAnswer(answer, currentQuestion) {
@@ -65,24 +79,28 @@ $(document).ready(function () {
             alert("You Got it?");
             // Total correct counter ticks up one.
             totalCorrect++;
+            // displays number of correct answers
+            $("#totalCorrect").text(" " + totalCorrect + " ");
             // sets to the next question
             i++;
             // Displays next question
             showAQuestion();
-            
+
         }
         else {
             // Otherwise total incorrect ticks up one
             totalIncorrect++
             // Alerts your choice was incorrect and shows the correct answere
             alert("Wrong. Here's the answer: " + currentQuestion.correct);
+            // Displays number of incorrect answeres
+            $("#totalIncorrect").text(" " + totalIncorrect + " ");
             // Sets to next question
             i++;
             // Displays next question
             showAQuestion();
-            
+
         }
-        
+
     }
     /* Function that decreses allottedTime variable by one
     and displays it in the countDown div*/
@@ -90,13 +108,15 @@ $(document).ready(function () {
         //allotedTime is set as a global var 
         allottedTime--;
         // dynamically displays countdown
-        $("#countDown").html("<h2>" + allottedTime + "</h2>");
+        $("#countDown").text(allottedTime);
         // checks to see if time has run out to answere question
         if (allottedTime === 0) {
             // if true, then alerts...
             alert("Time Up!");
             // ticks up one for incorrect answere
             totalIncorrect++;
+            // Displays number of incorrect answeres
+            $("#totalIncorrect").text(" " + totalIncorrect + " ");
             // moves to next question in array
             i++;
             // stops timer
@@ -108,12 +128,13 @@ $(document).ready(function () {
     /* function clears(resets) the allottedTime variable */
     function stopCountDown() {
         clearInterval(intervalId);
-        allottedTime = 10;  
+        allottedTime = 10;
     }
     // Starts game when clicked by displaying a question
     $("#startGame").on("click", function () {
         showAQuestion();
         $("#startGame").hide(800);
+        $(".totals").show(800);
     });
 
     // Recieves answer chosen
@@ -123,18 +144,6 @@ $(document).ready(function () {
         // stopCountDown();
     });
 
-    // Checks to see if you've run out of questions
-    // function checkIfQuestionsRanOut() {
-    //     if (totalCorrect + totalIncorrect >= game.lenght) {
-    //         alert("That's it. Thanks for playing");
-    //     }
-    //     console.log()
-    // }
-    
-
-    // If timer reaches 0, display correct answer and tick up total incorrect.
-    // Reset time
-    // Display next question.
 
 
 

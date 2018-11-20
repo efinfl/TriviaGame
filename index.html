@@ -17,12 +17,16 @@
 <body>
     <div class="container">
         <div class="jumbotron">
-            <div class=row>
+            <div class="row">
                 <div class="col-9"><img id="logo" src="assets/images/Logo.png"></div>
-                <div class="col-3" id=countDownContainer><img src="assets/images/stopWatch.png">
+                <div class="col-3" id="countDownContainer"><img src="assets/images/stopWatch.png">
                     <button type="button" class="btn btn-primary" id="startGame">Click to Start</button>
-                    <div id=countDown></div>
-                    <div class=totals></div>
+                    <div id="countDown">10</div>
+                    <div class="row totals">
+                        <div class="tally">Total Correct: <span id="totalCorrect"></span> </div>
+
+                        <div class="tally">Total Wrong: <span id="totalIncorrect"></span> </div>
+                    </div>
                 </div>
             </div>
         </div>
